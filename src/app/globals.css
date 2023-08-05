@@ -7,7 +7,69 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+.one{
+  border-radius: 20px;
+}
+.two:hover{
+  border: 2px solid #B2A7FF;
 
+}
+.two{
+  border: 2px solid gray;
+  border-radius: 15px;
+  width: 100%;
+  padding: 10px;
+}
+.one:hover{
+ border:  2px solid #042858;
+ /* background-color: black; */
+}
+@media screen and (max-width:768px) {
+  .three{
+    flex-direction: column;
+    width: 85%;
+    height: 120vh;
+    /* background-color: blue; */
+  }
+  .twelve{
+    /* background-color: red; */
+    height: 130vh;
+  }
+  .text{
+    font-size: 30px;
+  }
+  .five{
+    flex-direction: row;
+  }
+  .six{
+    display: none;
+  }
+  .seven{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    /* min-height: 50vh; */
+    /* background-repeat: repeat; */
+  }
+  .fiftys{
+    width: 100%;
+    flex-direction: column;
+  }
+  .fiftys img{
+    margin-top: 30px;
+  }
+  .fiftyss{
+    /* height: 10vh; */
+    font-size: 22px;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  .eight{
+    align-items: center;
+  }
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -16,12 +78,6 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+/* button {
+  background-color: red;
+} */
