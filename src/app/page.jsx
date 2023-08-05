@@ -86,6 +86,8 @@ export default function Home() {
       content: (
         <StepTwo
           activePlan={activePlan}
+          activeStep={activeTab}
+          setActiveStep={setActivetab}
           handleClickPlan={handleClickPlan}
           planData={planData}
         />
@@ -93,11 +95,23 @@ export default function Home() {
     },
     {
       content: (
-        <StepThree pickAdd={pickAdds} handleClickPick={handleClickPick} />
+        <StepThree
+          activeStep={activeTab}
+          setActiveStep={setActivetab}
+          pickAdd={pickAdds}
+          handleClickPick={handleClickPick}
+        />
       ),
     },
     {
-      content: <StepFour options={pickAdds} selectedOptions={selectedOptions} activePlan={activePlan} planData={planData} />,
+      content: (
+        <StepFour
+          options={pickAdds}
+          selectedOptions={selectedOptions}
+          activePlan={activePlan}
+          planData={planData}
+        />
+      ),
     },
   ];
 

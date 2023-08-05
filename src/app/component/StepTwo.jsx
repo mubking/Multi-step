@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 // import arcade from '.'
-const StepTwo = ({activePlan, handleClickPlan, planData}) => {
+const StepTwo = ({ activePlan, handleClickPlan, planData, activeStep, setActiveStep }) => {
   const [isOn, setIsOn] = useState(false);
 
   const handleToggle = () => {
@@ -17,12 +17,15 @@ const StepTwo = ({activePlan, handleClickPlan, planData}) => {
       </p>
       <div className="flex flex-row w-[100%] mt-10 gap-4  h-40 ">
         {planData.map((pd, i) => (
-          <div onClick={()=> handleClickPlan(i)} className={`${activePlan === i ? "bg-blue-500" : ""} w-[100%] border one border-gray-300 p-4 border-sm `}>
+          <div
+            onClick={() => handleClickPlan(i)}
+            className={`${
+              activePlan === i ? "bg-blue-500" : ""
+            } w-[100%] border one border-gray-300 p-4 border-sm `}
+          >
             <img src={pd.image} alt="" />
             <h2 className="mt-10">{pd.title}</h2>
-            <div className=" flex flex-row  items-center  ">
-              {pd.amount}
-            </div>
+            <div className=" flex flex-row  items-center  ">{pd.amount}</div>
           </div>
         ))}
         {/* <div className=" w-[100%] border one border-gray-300 p-4 border-sm ">
@@ -68,11 +71,17 @@ const StepTwo = ({activePlan, handleClickPlan, planData}) => {
         <h2>yearly</h2>
       </div>
 
-      <div className="flex flex-row justify-between mt-10">
-        <button class="inline-flex text-[#BBBDC6] bg-[transparent] border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-          Go back
+      <div className="flex justify-between items-center mt-4">
+        <button
+          onClick={() => setActiveStep(activeStep - 1)}
+          className="inline-flex text-[hsl(213,96%,18%)] border-none py-2 px-5 text-[16px]"
+        >
+          Go Back
         </button>
-        <button class="inline-flex text-white bg-[#03295A] border-0 py-2 px-6 focus:outline-none hover:bg-[#F9818E] rounded ">
+        <button
+          onClick={() => setActiveStep(activeStep + 1)}
+          className="inline-flex text-white bg-[hsl(213,96%,18%)] border-0 py-2 px-5 focus:outline-none hover:opacity-[90%] rounded text-lg"
+        >
           Next Step
         </button>
       </div>
