@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function Home() {
   const [activeTab, setActivetab] = useState(0);
   const [activePlan, setActivePlan] = useState(0);
-  const [activePick, setActivePick] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const menuLink = [
     {
@@ -36,66 +36,74 @@ export default function Home() {
     {
       image: "/arcade.svg",
       title: "Arcade",
-      amount: "$9/mo "
-      
+      amount: "$9/mo ",
     },
     {
       image: "/advanced.svg",
       title: "Advanced",
-      amount: "$12/mo"
-
+      amount: "$12/mo",
     },
     {
       image: "/pro.svg",
       title: "pro",
-      amount: "$15/mo"
-
+      amount: "$15/mo",
     },
   ];
   const handleClickPlan = (i) => {
-    setActivePlan(i)
-  }
-  const pickAdd = [
+    setActivePlan(i);
+  };
+  const pickAdds = [
     {
-      button: '',
-      title: 'Online service',
-      para: 'Access to multiplayer games',
-      month: '+$1/mo',
+      head: "Online service",
+      text: "Access to multiplayer games",
+      amount: "+$1/mo",
     },
     {
-      button: '',
-      title: '',
-      para: '',
-      month: '',
+      head: "Larger storage",
+      text: "Extra 1TB of cloud save",
+      amount: "+$2/mo",
     },
     {
-      button: '',
-      title: '',
-      para: '',
-      month: '',
+      head: "Customizable Profile",
+      text: "Custom theme on your profile",
+      amount: "+$2/mo",
     },
   ];
-  const handleClickPick = (i) => {
-    setActivePick(i);
+
+  const handleClickPick = (index) => {
+    if (selectedOptions.includes(index)) {
+      setSelectedOptions(selectedOptions.filter((item) => item !== index));
+    } else {
+      setSelectedOptions([...selectedOptions, index]);
+    }
   };
+
   const contentMenu = [
     {
-      content: (<StepOne />)
+      content: <StepOne />,
     },
     {
-      content: (<StepTwo activePlan={activePlan} handleClickPlan={handleClickPlan} planData={planData} />)
+      content: (
+        <StepTwo
+          activePlan={activePlan}
+          handleClickPlan={handleClickPlan}
+          planData={planData}
+        />
+      ),
     },
     {
-      content: (<StepThree />)
+      content: (
+        <StepThree pickAdd={pickAdds} handleClickPick={handleClickPick} />
+      ),
     },
     {
-      content: (<StepFour activePlan={activePlan} planData={planData} />)
+      content: <StepFour options={pickAdds} selectedOptions={selectedOptions} activePlan={activePlan} planData={planData} />,
     },
-  ]
+  ];
 
   const handleClickMenu = (i) => {
-    setActivetab(i)
-  }
+    setActivetab(i);
+  };
 
   return (
     <section className="flex bg-[#EEF5FF] twelve h-screen flex-col justify-center items-center">
@@ -103,30 +111,28 @@ export default function Home() {
         <header>
           <nav className="w-full h-[40vh] md:w-[250px] seven cursor-pointer p-4 rounded-2xl md:h-full md:bg-cover bg-auto bg-no-repeat bg-center bg-[url(/assets/images/bg-sidebar-desktop.svg)]">
             <div className="flex flex-col five gap-4">
-              {
-                menuLink.map((mn, i) => (
-                  <div onClick={() => handleClickMenu(i)} className="flex flex-row gap-3">
-                   <span className="flex  items-center  justify-center mt-2 border border-solid border-[white] rounded-full h-8 w-8 text-white hover:text-black hover:bg-[#BFE1FD]">
-                      {mn.number}
-                   </span>
+              {menuLink.map((mn, i) => (
+                <div
+                  onClick={() => handleClickMenu(i)}
+                  className="flex flex-row gap-3"
+                >
+                  <span className="flex  items-center  justify-center mt-2 border border-solid border-[white] rounded-full h-8 w-8 text-white hover:text-black hover:bg-[#BFE1FD]">
+                    {mn.number}
+                  </span>
 
-                    <div className="flex flex-col six">
-                      <span className="text-[#8988FF]">{mn.step}</span>
-                      <h3 className="text-white">{mn.title}</h3>
-                    </div>
+                  <div className="flex flex-col six">
+                    <span className="text-[#8988FF]">{mn.step}</span>
+                    <h3 className="text-white">{mn.title}</h3>
                   </div>
-                ))
-              }
+                </div>
+              ))}
             </div>
           </nav>
         </header>
         <main className="bg-white w-full">
-          {
-            contentMenu[activeTab].content
-          }
+          {contentMenu[activeTab].content}
         </main>
-        
       </div>
     </section>
-  )
+  );
 }
