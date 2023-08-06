@@ -1,58 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import Aos from "aos";
+import React, { useState, useEffect } from "react";
+import "aos/dist/aos.css";
 // import arcade from '.'
-const StepTwo = ({ activePlan, handleClickPlan, planData, activeStep, setActiveStep }) => {
+const StepTwo = ({
+  activePlan,
+  handleClickPlan,
+  planData,
+  activeStep,
+  setActiveStep,
+}) => {
   const [isOn, setIsOn] = useState(false);
 
   const handleToggle = () => {
     setIsOn((prevIsOn) => !prevIsOn);
   };
 
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+      delay: 200,
+      easing: "ease-in",
+    });
+  }, []);
+
   return (
-    <div className=" p-4 ">
+    <div data-aos="fade-left" className=" p-4 ">
       <h1 className="text-[#042954] text-5xl">Select your plan</h1>
       <p className="text-[#DDDEE6] text-sm mt-4">
         You have the option of monthly or yearly billing.
       </p>
-      <div className="flex flex-row w-[100%] mt-10 gap-4  h-40 ">
+      <div className="flex flex-col md:flex-row w-[100%] mt-10 gap-4">
         {planData.map((pd, i) => (
           <div
             onClick={() => handleClickPlan(i)}
             className={`${
               activePlan === i ? "bg-blue-500" : ""
-            } w-[100%] border one border-gray-300 p-4 border-sm `}
+            } w-[100%] flex flex-row gap-4 md:items-start items-center md:flex-col border one border-gray-300 px-4 py-4 border-sm `}
           >
+            <div className="">
             <img src={pd.image} alt="" />
-            <h2 className="mt-10">{pd.title}</h2>
-            <div className=" flex flex-row  items-center  ">{pd.amount}</div>
+            </div>
+            <div className="flex-col flex">
+              <h2 className="">{pd.title}</h2>
+              <h3 className="">{pd.amount}</h3>
+            </div>
           </div>
         ))}
-        {/* <div className=" w-[100%] border one border-gray-300 p-4 border-sm ">
-          <img src="/arcade.svg" alt="" />
-          <h2 className="mt-10">Arcade</h2>
-          <div className=" flex flex-row  items-center  ">
-            <p>$9/</p>
-            <p>Mo</p>
-          </div>
-        </div>
-        <div className=" w-[100%] border one border-gray-300 p-4">
-          <img src="/advanced.svg" alt="" />
-          <h2 className="mt-10"> Advanced</h2>
-
-          <div className="flex flex-row items-center">
-            <p>$12/</p>
-            <p>Mo</p>
-          </div>
-        </div>
-        <div className=" w-[100%] border one border-gray-300 p-4">
-          <img src="/pro.svg" alt="" />
-          <h2 className="mt-10">pro</h2>
-          <div className="flex flex-row items-center">
-            <p>$15/</p>
-            <p>Mo</p>
-          </div>
-        </div> */}
       </div>
       <div className=" bg-[#F8F9FE] flex flex-row gap-10 justify-center mt-8">
         <h2>Monthly</h2>

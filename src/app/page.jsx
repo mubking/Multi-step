@@ -4,6 +4,7 @@ import StepOne from "@/app/component/StepOne";
 import StepThree from "@/app/component/StepThree";
 import StepTwo from "@/app/component/StepTwo";
 import { useState } from "react";
+import StepFive from "./component/StepFive";
 
 export default function Home() {
   const [activeTab, setActivetab] = useState(0);
@@ -78,9 +79,17 @@ export default function Home() {
     }
   };
 
+  const handleReset = () => {
+    setActivetab(activeTab + 1);
+
+    setTimeout(() => {
+      setActivetab(0);
+    }, 3000);
+  };
+
   const contentMenu = [
     {
-      content: <StepOne />,
+      content: <StepOne activeStep={activeTab} setActiveStep={setActivetab} />,
     },
     {
       content: (
@@ -107,11 +116,17 @@ export default function Home() {
       content: (
         <StepFour
           options={pickAdds}
+          activeStep={activeTab}
+          setActiveStep={setActivetab}
           selectedOptions={selectedOptions}
           activePlan={activePlan}
           planData={planData}
+          handleReset={handleReset}
         />
       ),
+    },
+    {
+      content: <StepFive />,
     },
   ];
 
@@ -120,11 +135,11 @@ export default function Home() {
   };
 
   return (
-    <section className="flex bg-[#EEF5FF] twelve h-screen flex-col justify-center items-center">
-      <div className="flex flex-row three gap-6 w-[60%] rounded-2xl bg-white p-4 h-[85vh]">
+    <section className="flex bg-[#EEF5FF] min-h-screen md:h-screen flex-col justify-center items-center">
+      <div className="flex md:flex-row flex-col px-2 md:px-0 gap-6 md:w-[60%] rounded-2xl md:bg-white md:p-4 h-auto md:h-[85vh]">
         <header>
-          <nav className="w-full h-[40vh] md:w-[250px] seven cursor-pointer p-4 rounded-2xl md:h-full md:bg-cover bg-auto bg-no-repeat bg-center bg-[url(/assets/images/bg-sidebar-desktop.svg)]">
-            <div className="flex flex-col five gap-4">
+          <nav className="w-full h-[40vh] md:w-[250px] seven cursor-pointer md:mx-4 rounded-2xl md:h-full md:bg-cover bg-cover bg-no-repeat bg-center bg-[url(/assets/images/bg-sidebar-mobile.svg)] md:bg-[url(/assets/images/bg-sidebar-desktop.svg)]">
+            <div className="flex pl-2 flex-col five gap-4">
               {menuLink.map((mn, i) => (
                 <div
                   onClick={() => handleClickMenu(i)}
@@ -144,7 +159,7 @@ export default function Home() {
           </nav>
         </header>
         <main className="bg-white w-full">
-          {contentMenu[activeTab].content}
+          <div className="relative md:top-0 bottom-[200px] bg-white">{contentMenu[activeTab].content}</div>
         </main>
       </div>
     </section>

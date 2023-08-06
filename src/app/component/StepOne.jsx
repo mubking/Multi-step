@@ -1,13 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
-const StepOne = () => {
+const StepOne = ({activeStep, setActiveStep}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [numberError, setNumberError] = useState("");
+
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+      delay: 200,
+      easing: "ease-in"
+    })
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,11 +28,14 @@ const StepOne = () => {
     if (name.trim() === "") {
       setNameError("Name is required");
     }
-    if (email.trim() === "") {
+    else if (email.trim() === "") {
       setEmailError("Email Address is required");
     }
-    if (number.trim() === "") {
+    else if (number.trim() === "") {
       setNumberError("Number is required");
+    }
+    else{
+        setActiveStep(activeStep + 1)
     }
   };
   const handleInputChange = (e) => {
@@ -46,7 +59,7 @@ const StepOne = () => {
   };
 
   return (
-    <div className="p-4">
+    <div data-aos="fade-left" className="p-4">
       <h1 className="text-[#042954] text-5xl text">Personal info</h1>
       <p className="text-[#DDDEE6] text-sm mt-5">
         Please provide your name, email address, and phone number.
