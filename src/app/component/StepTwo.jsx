@@ -34,6 +34,7 @@ const StepTwo = ({
       <div className="flex flex-col md:flex-row w-[100%] mt-10 gap-4">
         {planData.map((pd, i) => (
           <div
+          key={i}
             onClick={() => handleClickPlan(i)}
             className={`${
               activePlan === i ? "bg-blue-500" : ""

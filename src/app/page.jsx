@@ -143,6 +143,7 @@ export default function Home() {
               {menuLink.map((mn, i) => (
                 <div
                   onClick={() => handleClickMenu(i)}
+                  key={i}
                   className="flex flex-row gap-3"
                 >
                   <span className="flex  items-center  justify-center mt-2 border border-solid border-[white] rounded-full h-8 w-8 text-white hover:text-black hover:bg-[#BFE1FD]">
